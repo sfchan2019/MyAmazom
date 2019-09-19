@@ -15,6 +15,7 @@ namespace MyAmazon
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -50,6 +51,18 @@ namespace MyAmazon
             modelBuilder.Entity<Product>()
                 .Property(e => e.Price)
                 .HasPrecision(19, 4);
+
+            modelBuilder.Entity<Cart>()
+                .Property(e => e.Customer_ID)
+                .IsOptional();
+
+            modelBuilder.Entity<Cart>()
+                .Property(e => e.Product_ID)
+                .IsOptional();
+
+            modelBuilder.Entity<Cart>()
+                .Property(e => e.Quality)
+                .IsOptional();
         }
     }
 }
